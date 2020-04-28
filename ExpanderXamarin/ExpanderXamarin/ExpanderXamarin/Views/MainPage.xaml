@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ExpanderXamarin"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+             x:Class="ExpanderXamarin.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ExpanderIcon">
+                <On Platform="Android" Value="ExpanderIcons.ttf#ExpanderIcons" />
+                <On Platform="UWP" Value="/Assets/ExpanderIcons.ttf#ExpanderIcons" />
+                <On Platform="iOS" Value="ExpanderIcons" />
+            </OnPlatform>
+        </ResourceDictionary>
+        <local:ExpanderIconConverter x:Key="ExpanderIconConverter"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="#EDF2F5" Margin="{OnPlatform iOS='0,40,0,0'}">
+            <StackLayout>
+                <syncfusion:SfExpander x:Name="expander1" HeaderIconPosition="None">
+                    <syncfusion:SfExpander.Header>
+                        <Grid HeightRequest="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center"
+                                FontFamily="{StaticResource ExpanderIcon}"
+                                Text="{Binding Path=IsExpanded,Source={x:Reference expander1}, Converter={StaticResource ExpanderIconConverter}, ConverterParameter={x:Static Device.RuntimePlatform}}"/>
+                            <Label Text="Veg Pizza" Grid.Column="1" TextColor="#495F6E"  VerticalTextAlignment="Center" />
+                        </Grid>
+                    </syncfusion:SfExpander.Header>
+                    <syncfusion:SfExpander.Content>
+                        <Grid Padding="10,10,10,10" BackgroundColor="#FFFFFF">
+                            <Label BackgroundColor="#FFFFFF" HeightRequest="50" Text="Veg pizza is prepared with the items that meet vegetarian standards by not including any meat or animal tissue products." TextColor="#303030" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </syncfusion:SfExpander.Content>
+                </syncfusion:SfExpander>
+
+                <syncfusion:SfExpander x:Name="expander2" HeaderIconPosition="None">
+                    <syncfusion:SfExpander.Header>
+                        <Grid HeightRequest="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center"
+                                   FontFamily="{StaticResource ExpanderIcon}"
+                                   Text="{Binding Path=IsExpanded,Source={x:Reference expander2}, Converter={StaticResource ExpanderIconConverter}, ConverterParameter={x:Static Device.RuntimePlatform}}"/>
+                            <Label Text="Non-veg Pizza" Grid.Column="1" TextColor="#495F6E"  VerticalTextAlignment="Center" />
+                        </Grid>
+                    </syncfusion:SfExpander.Header>
+                    <syncfusion:SfExpander.Content>
+                        <Grid Padding="10,10,10,10" BackgroundColor="#FFFFFF">
+                            <Label Text="Non-veg pizza is prepared by including the meat and animal tissue products." HeightRequest="50" TextColor="#303030" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </syncfusion:SfExpander.Content>
+                </syncfusion:SfExpander>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
